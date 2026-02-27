@@ -1,0 +1,43 @@
+cat << 'EOF' > README.md
+# 🚀 Not Steam
+
+> **The Wikipedia of Games.** A community-driven storefront and game database where knowledge is as valuable as the games themselves.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue)]()
+
+## 📖 Overview
+
+**Not Steam** is a hybrid platform that merges the power of a digital distribution service with the open-knowledge architecture of a Wiki. While traditional stores are controlled strictly by publishers, **Not Steam** empowers the players to document, tag, and verify every piece of game data.
+
+### Why "Not Steam"?
+* **Crowdsourced Accuracy:** Community-verified hardware benchmarks.
+* **Version History:** Track every update, patch note, and stealth-change.
+* **Knowledge Economy:** Earn reputation by contributing to the global archives.
+
+---
+
+## ✨ Core Features
+
+### 🛠 The Wiki-Store Hybrid
+* **Open-Edit Pages:** Users edit game descriptions, history, and technical specs.
+* **Verified Benchmarks:** Real-world performance stats for specific GPU/CPU combos.
+* **Version Rollbacks:** Access historical data and previous versions of game entries.
+
+### 🎮 The Launcher (The "Steam" Side)
+* **Digital Library:** One-click install and management for your titles.
+* **Community Tags:** Hyper-specific tagging (e.g., "Ultrawide Support," "No Microtransactions").
+* **User Profiles:** Showcase your library and your "Editor Rank."
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React / Next.js / Tailwind CSS |
+| **Backend** | Node.js (Express) |
+| **Database** | PostgreSQL |
+| **Auth** | NextAuth.js / JWT |
+
+---
