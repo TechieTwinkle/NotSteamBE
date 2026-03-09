@@ -1,0 +1,31 @@
+body{
+    margin:0;
+    font-family: Arial;
+}
+
+.profile-hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:80px;
+    background:black;
+}
+
+.profile-text h1{
+    font-size:120px;
+    font-weight:900;
+    color:white;
+    line-height:90px;
+}
+
+.profile-text p{
+    max-width:400px;
+    color:white;
+}
+
+.profile-avatar img{
+    border-radius: 50%;
+    height:350px;
+    /* box-shadow: ; */
+
+}

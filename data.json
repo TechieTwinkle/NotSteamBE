@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "joy khojee",
+    "email": "fake@fake.com",
+    "password": "123456"
+  },
+  {
+    "id": 2,
+    "name": "krish garg",
+    "email": "wow@gmail.com",
+    "password": "helloworld"
+  },
+  {
+    "id": 3,
+    "name": "gauri bansal",
+    "email": "garuiban@gauri.com",
+    "password": "hihulo"
+  },
+  {
+    "id": 4,
+    "name": "joy khojee",
+    "email": "ardiumwing@gmail.com",
+    "password": "`123"
+  }
+]
