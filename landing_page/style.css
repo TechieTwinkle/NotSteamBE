@@ -4,6 +4,7 @@ margin: 0;
 padding: 0;
 box-sizing: border-box;
 font-family: 'Poppins', 'Raleway';
+/* color: black; */
 }
 body
 {
@@ -82,8 +83,8 @@ nav ul li a{
 .back_video
 {
     position: absolute;
-    right: 10;
-    bottom: 500;
+    right: 1;
+    bottom: 1;
 
     z-index: -1;
 }
