@@ -171,10 +171,35 @@ nav ul li a{
     width: 100%;
     color: white;
 }
-
 footer
 {
+    display: flex;
+    background-image: url(https://images.unsplash.com/photo-1604846887565-640d2f52d564?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+}
+footer .left-part
+{
+    padding: 0 5%;
     height: 50vh;
-    width: 100%;
-    background-color: red;
+    width: 50%;
+    background-color: transparent;
+    color: #fff;
+}
+footer .right-part
+{
+    padding: 0 5%;
+    height: 50vh;
+    width: 50%;
+    background-color: transparent;
+    color: #fff;
+}
+footer .right-part a
+{
+    color: white;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    width: 100px;
+    height: 50px;
 }
