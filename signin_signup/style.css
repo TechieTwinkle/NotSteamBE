@@ -11,6 +11,9 @@
 
 body{
     background-color: black;
+    background-image: url(../assets/Pixel\ Game\ Wallpaper.jpg);
+    background-size: cover;
+
     /* background: linear-gradient(to right, #333, #999); */
     display: flex;
     align-items: center;

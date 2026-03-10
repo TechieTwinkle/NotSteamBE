@@ -90,6 +90,7 @@ nav ul li a{
 }
 .search-box {
     font-size: 14px;
+    
     border: solid 0.2em #000000;
     display: inline-block;
     position: relative;
@@ -139,12 +140,13 @@ nav ul li a{
 .search-box input:not(:placeholder-shown) + button {
     transform: rotate(-45deg) translateY(0);
     transition: transform 150ms ease-out 800ms;
+    
 }
 
 .search-box button:before,
 .search-box button:after {
     content: "";
-    background-color: #000;
+    background-color: #333;
     width: 0.3em;
     height: 1.4em;
     position: absolute;
@@ -153,6 +155,7 @@ nav ul li a{
 .search-box button:after {
     transform: rotate(90deg);
     opacity: 0;
+    background-color: #333;
 }
 
 .search-box input:focus + button:after,
