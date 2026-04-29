@@ -1,18 +1,15 @@
 {
   "name": "notsteam",
   "version": "1.0.0",
-  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "backend:dev": "npm --prefix backend run dev",
+    "backend:start": "npm --prefix backend run start",
+    "frontend:dev": "npm --prefix frontend run dev",
+    "start": "npm --prefix backend run start"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "ejs": "^5.0.1",
-    "express": "^5.2.1",
-    "nodemon": "^3.1.14"
-  }
+  "dependencies": {}
 }
