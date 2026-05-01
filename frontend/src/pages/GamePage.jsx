@@ -1,20 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import toast from "react-hot-toast";
 import api from "../api/client";
-import { useAuthStore } from "../store/authStore";
+import { useAuth } from "../context/AuthContext";
 import StarRating from "../components/StarRating";
 import { formatDate } from "../utils/format";
 
 const GamePage = () => {
   const { id } = useParams();
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
   const [commentText, setCommentText] = useState("");
 
-  const fetchGame = async () => {
+  const fetchGame = useCallback(async () => {
     setLoading(true);
     try {
       const { data } = await api.get(`/games/${id}`);
@@ -24,11 +24,14 @@ const GamePage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
-    fetchGame();
-  }, [id]);
+    const run = async () => {
+      await fetchGame();
+    };
+    run();
+  }, [fetchGame]);
 
   const discussion = useMemo(() => game?.comments?.filter((c) => !c.parentCommentId) || [], [game]);
 

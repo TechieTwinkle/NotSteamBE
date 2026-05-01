@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Search, LayoutDashboard, UserCircle2, LogOut } from "lucide-react";
-import { useAuthStore } from "../store/authStore";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = ({ games = [] }) => {
-  const { user, logout } = useAuthStore();
+  const { user, logout } = useAuth();
   const [query, setQuery] = useState("");
 
   const suggestions = useMemo(() => {
@@ -42,11 +42,9 @@ const Navbar = ({ games = [] }) => {
         <div className="ml-auto flex items-center gap-3 text-sm">
           {user ? (
             <>
-              {user.role === "developer" && (
-                <Link to={`/profile/${user.id}`} className="flex items-center gap-1 rounded-lg border border-zinc-700 px-3 py-2 hover:border-orange-300">
+              <Link to="/dashboard" className="flex items-center gap-1 rounded-lg border border-zinc-700 px-3 py-2 hover:border-orange-300">
                   <LayoutDashboard className="h-4 w-4" /> Dashboard
-                </Link>
-              )}
+              </Link>
               <Link to={`/profile/${user.id}`} className="flex items-center gap-1 text-zinc-200 hover:text-white">
                 <UserCircle2 className="h-5 w-5" />
               </Link>
@@ -55,7 +53,7 @@ const Navbar = ({ games = [] }) => {
               </button>
             </>
           ) : (
-            <Link to="/auth" className="rounded-xl bg-orange-500 px-4 py-2 font-medium text-black">Join</Link>
+            <Link to="/signup" className="rounded-xl bg-orange-500 px-4 py-2 font-medium text-black">Join</Link>
           )}
         </div>
       </div>

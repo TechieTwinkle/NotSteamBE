@@ -58,7 +58,9 @@ const updateMe = async (req, res) => {
   if (typeof activity === "string") user.activity = activity;
   if (gender) {
     user.gender = gender;
-    user.avatar = avatarByGender(user.name, gender);
+    if (!user.profilePictureUrl) {
+      user.avatar = avatarByGender(user.name, gender);
+    }
   }
 
   await user.save();

@@ -3,13 +3,15 @@ const User = require("../models/User");
 
 const protect = async (req, res, next) => {
   const authHeader = req.headers.authorization;
+  const cookieToken = req.cookies?.authToken;
+  const bearerToken = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+  const token = bearerToken || cookieToken;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!token) {
     return res.status(401).json({ message: "Unauthorized: token missing" });
   }
 
   try {
-    const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id).select("-password");
 

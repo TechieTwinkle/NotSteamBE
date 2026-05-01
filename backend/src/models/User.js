@@ -4,7 +4,8 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    password: { type: String, required: true, minlength: 6 },
+    password: { type: String, minlength: 6 },
+    googleId: { type: String, unique: true, sparse: true },
     role: { type: String, enum: ["developer", "player"], required: true },
     gender: { type: String, enum: ["male", "female", "other"], default: "other" },
     bio: { type: String, default: "" },
@@ -12,6 +13,10 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default: "https://api.dicebear.com/8.x/adventurer/svg?seed=notsteam"
+    },
+    profilePictureUrl: {
+      type: String,
+      default: ""
     },
     games: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }],
     playedGames: [{ type: mongoose.Schema.Types.ObjectId, ref: "Game" }]

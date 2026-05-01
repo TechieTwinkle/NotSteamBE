@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useAuthStore } from "../store/authStore";
+import { useAuth } from "../context/AuthContext";
 import GameTile from "../components/GameTile";
 
 const HomePage = ({ stats, games = [], loading }) => {
-  const { user } = useAuthStore();
+  const { user } = useAuth();
   const featuredGames = games.slice(0, 6);
 
   return (
@@ -16,7 +16,7 @@ const HomePage = ({ stats, games = [], loading }) => {
           </motion.h1>
           <p className="mt-5 max-w-xl text-sm text-zinc-300 sm:text-base">A warm, minimal library for deployed indie games, living documentation, and player-first feedback loops.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {!user && <Link to="/auth" className="rounded-xl bg-orange-500 px-5 py-3 text-center font-semibold text-black">Join</Link>}
+            {!user && <Link to="/signup" className="rounded-xl bg-orange-500 px-5 py-3 text-center font-semibold text-black">Join</Link>}
             <Link to="/discover" className="rounded-xl border border-zinc-700 px-5 py-3 text-center hover:border-orange-300">Browse games</Link>
           </div>
         </div>
