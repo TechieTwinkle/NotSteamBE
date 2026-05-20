@@ -15,7 +15,6 @@ const SignupPage = () => {
     role: defaultRole,
     gender: "other",
   });
-  const [profilePicture, setProfilePicture] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user, setAuth } = useAuth();
@@ -43,18 +42,14 @@ const SignupPage = () => {
     event.preventDefault();
     setLoading(true);
     try {
-      const payload = new FormData();
-      payload.append("name", form.name);
-      payload.append("email", form.email);
-      payload.append("password", form.password);
-      payload.append("role", form.role);
-      payload.append("gender", form.gender);
-      if (profilePicture) {
-        payload.append("profilePicture", profilePicture);
-      }
-
-      const { data } = await api.post("/auth/register", payload, {
-        headers: { "Content-Type": "multipart/form-data" },
+      // No profile picture at signup — users start with a default avatar
+      // and can change it later on their profile page.
+      const { data } = await api.post("/auth/register", {
+        name: form.name,
+        email: form.email,
+        password: form.password,
+        role: form.role,
+        gender: form.gender,
       });
       setAuth(data.token, data.user);
       toast.success("Welcome to notSteam");
@@ -70,7 +65,7 @@ const SignupPage = () => {
     <div className="mx-auto max-w-lg rounded-3xl border border-zinc-800 bg-zinc-900/70 p-8 shadow-2xl shadow-black/40">
       <p className="text-xs uppercase tracking-[0.25em] text-orange-300">Get started</p>
       <h1 className="mt-2 text-3xl font-black text-zinc-100">Create your notSteam account</h1>
-      <p className="mt-2 text-sm text-zinc-400">Minimal setup, warm UI, and your profile image from day one.</p>
+      <p className="mt-2 text-sm text-zinc-400">Quick setup — you can personalize your avatar later.</p>
 
       <form onSubmit={onSubmit} className="mt-6 space-y-3">
         <input
@@ -115,15 +110,6 @@ const SignupPage = () => {
             <option value="other">Other</option>
           </select>
         </div>
-        <label className="block rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-zinc-300">
-          <span className="mb-2 block text-zinc-400">Profile picture (JPG/PNG/WEBP, up to 2MB)</span>
-          <input
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            onChange={(e) => setProfilePicture(e.target.files?.[0] || null)}
-            className="w-full text-sm text-zinc-300 file:mr-4 file:rounded-lg file:border-0 file:bg-orange-500 file:px-3 file:py-2 file:font-medium file:text-black"
-          />
-        </label>
         <button
           disabled={loading}
           className="w-full rounded-xl bg-orange-500 px-4 py-3 font-semibold text-black transition hover:bg-orange-400 disabled:opacity-60"

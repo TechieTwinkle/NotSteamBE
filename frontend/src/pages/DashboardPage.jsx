@@ -40,9 +40,8 @@ const initialForm = {
 const StatCard = ({ icon: Icon, label, value, accent }) => (
   <div className="flex items-center gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/60 px-5 py-4">
     <div
-      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-        accent ? "bg-orange-500/15 text-orange-400" : "bg-zinc-800 text-zinc-400"
-      }`}
+      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${accent ? "bg-orange-500/15 text-orange-400" : "bg-zinc-800 text-zinc-400"
+        }`}
     >
       <Icon className="h-5 w-5" />
     </div>
@@ -237,6 +236,7 @@ const DashboardPage = () => {
       loadGames();
       setActiveTab("manage");
     } catch (error) {
+      console.log("Full error:", error?.response?.data);
       toast.error(error?.response?.data?.message || "Upload failed");
     } finally {
       setLoading(false);
@@ -299,11 +299,10 @@ const DashboardPage = () => {
           <button
             key={id}
             onClick={() => setActiveTab(id)}
-            className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
-              activeTab === id
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition ${activeTab === id
                 ? "bg-orange-500 text-black"
                 : "text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Icon className="h-4 w-4" />
             {label}

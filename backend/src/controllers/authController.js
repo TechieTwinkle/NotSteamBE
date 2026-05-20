@@ -60,7 +60,6 @@ const loginValidation = [
 
 const register = async (req, res) => {
   const { name, email, password, role, gender = "other" } = req.body;
-  const profilePictureUrl = profilePicturePathToUrl(req);
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -68,14 +67,17 @@ const register = async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
+
+  // No profile picture at registration — user can set one later on their
+  // profile page. They start with a gender-based DiceBear avatar.
   const user = await User.create({
     name,
     email,
     password: hashedPassword,
     role,
     gender,
-    avatar: profilePictureUrl || avatarByGender(name, gender),
-    profilePictureUrl
+    avatar: avatarByGender(name, gender),
+    profilePictureUrl: ""
   });
 
   const token = signToken(user);

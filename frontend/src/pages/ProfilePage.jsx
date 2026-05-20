@@ -13,9 +13,11 @@ import {
   ExternalLink,
   LayoutDashboard,
   ShieldCheck,
+  Camera,
 } from "lucide-react";
 import api from "../api/client";
 import { useAuth } from "../context/AuthContext";
+import ProfilePictureModal from "../components/ProfilePictureModal";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
@@ -129,14 +131,28 @@ const ActivityItem = ({ item, index }) => (
 
 const ProfilePage = () => {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [profile, setProfile] = useState(null);
   const [tab, setTab] = useState("bio");
   const [editing, setEditing] = useState(false);
   const [editable, setEditable] = useState({ bio: "", activity: "", gender: "other" });
   const [saving, setSaving] = useState(false);
+  const [showPicModal, setShowPicModal] = useState(false);
 
   const isOwner = user?.id === id;
+
+  // Called when the ProfilePictureModal saves successfully
+  const handlePictureSaved = (data) => {
+    setProfile((prev) => ({
+      ...prev,
+      avatar: data.avatar,
+      profilePictureUrl: data.profilePictureUrl,
+    }));
+    // Keep the global auth context in sync (e.g. navbar avatar)
+    if (updateUser) {
+      updateUser({ avatar: data.avatar, profilePictureUrl: data.profilePictureUrl });
+    }
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -211,7 +227,22 @@ const ProfilePage = () => {
         <div className="h-1.5 w-full bg-gradient-to-r from-orange-600 via-orange-400 to-orange-600 opacity-70" />
 
         <div className="flex flex-wrap items-center gap-5 p-6">
-          <Avatar src={avatarSrc} name={profile.name} size={80} />
+          {/* ── clickable avatar (owner only) ── */}
+          {isOwner ? (
+            <button
+              onClick={() => setShowPicModal(true)}
+              className="group relative shrink-0 cursor-pointer"
+              title="Change profile picture"
+            >
+              <Avatar src={avatarSrc} name={profile.name} size={80} />
+              {/* camera overlay on hover */}
+              <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                <Camera className="h-6 w-6 text-white" />
+              </div>
+            </button>
+          ) : (
+            <Avatar src={avatarSrc} name={profile.name} size={80} />
+          )}
 
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
@@ -457,6 +488,15 @@ const ProfilePage = () => {
         )}
 
       </AnimatePresence>
+
+      {/* ── profile picture modal ── */}
+      {showPicModal && (
+        <ProfilePictureModal
+          currentSrc={avatarSrc}
+          onClose={() => setShowPicModal(false)}
+          onSaved={handlePictureSaved}
+        />
+      )}
     </div>
   );
 };

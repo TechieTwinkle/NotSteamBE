@@ -34,6 +34,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Patch specific user fields (e.g. avatar) without a full re-login
+  const updateUser = (patch) => {
+    setAuthState((prev) => {
+      if (!prev.user) return prev;
+      const next = { ...prev, user: { ...prev.user, ...patch } };
+      localStorage.setItem("notsteam-auth", JSON.stringify(next));
+      return next;
+    });
+  };
+
   useEffect(() => {
     const hydrateAuth = async () => {
       try {
@@ -62,7 +72,8 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated: Boolean(auth.user),
       authLoading,
       setAuth,
-      logout
+      logout,
+      updateUser
     }),
     [auth.token, auth.user, authLoading]
   );

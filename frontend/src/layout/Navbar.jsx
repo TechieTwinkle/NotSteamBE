@@ -46,7 +46,15 @@ const Navbar = ({ games = [] }) => {
                   <LayoutDashboard className="h-4 w-4" /> Dashboard
               </Link>
               <Link to={`/profile/${user.id}`} className="flex items-center gap-1 text-zinc-200 hover:text-white">
-                <UserCircle2 className="h-5 w-5" />
+                {user.profilePictureUrl || user.avatar ? (
+                  <img
+                    src={user.profilePictureUrl || user.avatar}
+                    alt={user.name}
+                    className="h-7 w-7 rounded-full border border-zinc-700 object-cover transition hover:border-orange-400"
+                  />
+                ) : (
+                  <UserCircle2 className="h-5 w-5" />
+                )}
               </Link>
               <button onClick={logout} className="rounded-lg border border-zinc-700 px-2 py-2 hover:border-zinc-500">
                 <LogOut className="h-4 w-4" />
