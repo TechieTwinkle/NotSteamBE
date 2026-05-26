@@ -5,7 +5,7 @@ notSteam is a production-ready MERN application where indie developers publish d
 ## Tech Stack
 - **Frontend:** React (Vite), TailwindCSS, Framer Motion, Zustand
 - **Backend:** Node.js, Express, Mongoose
-- **Auth:** JWT (role-based: developer/player)
+- **Auth:** JWT (role-based: developer/player), Google OAuth
 - **Database:** MongoDB
 
 ## Folder Structure
