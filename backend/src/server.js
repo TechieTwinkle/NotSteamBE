@@ -6,6 +6,8 @@
 // // });
 
 // require("dotenv").config({ path: "./.env" });
+import cors from 'cors';
+app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173' }));
 
 const path = require("path");
 const dotenv = require("dotenv");
